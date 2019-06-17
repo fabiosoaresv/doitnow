@@ -1,17 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 development:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: doitnow_development
-  pool: 5
-  username: postgres
-  password:
-  timeout: 5000
- 
+
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: doitnow_test
-  pool: 5
-  username: postgres
-  password:
-  timeout: 5000
+
+production:
+  <<: *default
+  database: doitnow_production
+  username: doitnow
+  password: <%= ENV['doitnow_DATABASE_PASSWORD'] %>
